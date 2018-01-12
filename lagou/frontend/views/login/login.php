@@ -19,7 +19,7 @@ use yii\helpers\Url;
 		 <div class="login_box">
         	<form id="loginForm">
 				<input type="text" id="email" name="email" value="" tabindex="1" placeholder="请输入登录邮箱地址" />
-			  	<input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码" />
+                <input type="password" id="password" name="password" tabindex="2" placeholder="请输入密码" />
 				<span class="error" style="display:none;" id="beError"></span>
 			    <label class="fl" for="remember"><input type="checkbox" id="remember" value="" checked="checked" name="autoLogin" /> 记住我</label>
 			    <a href="reset.html" class="fr" target="_blank">忘记密码？</a>
@@ -57,7 +57,10 @@ $(function(){
 	    	   	},
 	    	   	password: {
 	    	    	required: true
-	    	   	}
+	    	   	},
+                yzm: {
+	    	   	    required:true
+                }
 	    	},
 	    	messages: {
 	    	   	email: {
@@ -66,7 +69,10 @@ $(function(){
 	    	   	},
 	    	   	password: {
 	    	    	required: "请输入密码"
-	    	   	}
+	    	   	},
+                yzm: {
+	    	   	    required:"请输入验证码"
+                }
 	    	},
 	    	submitHandler:function(form){
 	    		if($('#remember').prop("checked")){

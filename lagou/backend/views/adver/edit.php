@@ -3,13 +3,24 @@
 use yii\helpers\Url;
 
 ?>
+<script type="text/javascript" src="datePicker/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="datePicker/js/jquery.datePicker-min.js"></script>
+<link type="text/css" href="datePicker/css/datepicker.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function(){
 
-<!DOCTYPE html>
-<html lang="en">
+        $(".datepicker").datePicker({
+            inline:true,
+            selectMultiple:false
+        });
 
-	<body>
-		<!-- /.nav-list -->
-				<div class="main-content">
+        $("#datepicker").datePicker({
+            clickInput:true
+        });
+
+    });
+</script>
+
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
 							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
@@ -18,58 +29,148 @@ use yii\helpers\Url;
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="<?=Url::toRoute(['index/index'])?>">首页</a>
+								<a href="#">首页</a>
 							</li>
-							<li class="active">工作分类管理</li>
-							<li class="active">添加分类</li>
+							<li class="active">安居客控制台</li>
+							<li class="active">广告管理</li>
+							<li class="active">负责房源</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
 					<div class="page-content">
 							<div class="row">
+							
+
 									<div class="col-xs-12">
 									
-									<form class="form-horizontal" role="form" action="<?=Url::toRoute(['type/addtype'])?>" method="post">
+									<form class="form-horizontal" enctype="multipart/form-data" action="<?=Url::toRoute(['adver/upd_do'])?>" method="post">
+                                        <input type="hidden" name="id" value="<?=$info['adver_id']?>">
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 分类名称 </label>
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 广告名称 </label>
 
                                             <div class="col-sm-9">
-                                                <input type="text" id="form-field-1" placeholder="分类名称"  name="type_name" class="col-xs-10 col-sm-5" />
+                                                <input type="text" id="form-field-1" placeholder="请输入广告名称" value="<?=$info['adver_name']?>" name="adver_name" class="col-xs-10 col-sm-5" />
+                                            </div>
+                                        </div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 地区 </label>
+
+														<div class="col-sm-9">
+															<select name="adver_place_id">
+																<option value="">&nbsp;</option>
+                                                                <?php foreach($data as $v) {?>
+																    <option value="<?=$v['region_id']?>"><?=$v['region_name']?></option>
+                                                                <?php }?>
+															</select>
+													    </div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 上传广告图片 </label>
+
+										<div class="col-sm-9">
+                                            <img src="<?= $info['adver_img'] ?>" alt="">
+											<input type="file" name="adver_img">
+										</div>
+									</div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 广告连接地址 </label>
+
+                                            <div class="col-sm-9">
+                                                <input type="text" id="form-field-1" placeholder="例如:https://www.baidu.com" value="<?=$info['adver_link']?>" name="adver_link" class="col-xs-10 col-sm-5" />
                                             </div>
                                         </div>
 
                                         <div class="space-4"></div>
 
                                         <div class="form-group">
-                                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 父级名称 </label>
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 广告描述 </label>
 
-                                                            <div class="col-sm-9">
-                                                                <select name="parent_id">
-                                                                    <option value="">&nbsp;</option>
-                                                                    <?php foreach ($data as $v) {?>
-                                                                        <option value="<?=$v['job_type_id']?>"><?=$v['job_type_name']?></option>
-                                                                    <?php }?>
-                                                                </select>
-                                                                </div>
-                                        </div>
-                                        <div class="clearfix form-actions">
-                                            <div class="col-md-offset-3 col-md-9">
-                                                <!--<input type="submit" class="btn btn-info" value=" 添加 ">-->
-                                                <button class="btn btn-info" type="submit">
-                                                    <i class="icon-ok bigger-110"></i>
-                                                    增加
-                                                </button>
-
-                                                &nbsp; &nbsp; &nbsp;
-                                                <button class="btn" type="reset">
-                                                    <i class="icon-undo bigger-110"></i>
-                                                    重置
-                                                </button>
+                                            <div class="col-sm-9">
+                                                <textarea name="adver_content" id="" cols="50" rows="5" ><?=$info['adver_content']?></textarea>
                                             </div>
                                         </div>
 
-                                        <div class="hr hr-24"></div>
+                                        <div class="space-4"></div>
 
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 广告时间 </label>
+
+                                            <div class="col-sm-9">
+                                                <input type="text" placeholder="" name="adver_start_time" value="<?=$info['adver_start_time']?>">
+                                                -
+                                                <input type="text" placeholder="" name="adver_end_time" value="<?=$info['adver_end_time']?>">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="space-4"></div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 排序 </label>
+
+                                            <div class="col-sm-9">
+                                                <input type="text" placeholder="" name="adver_sort" value="<?=$info['adver_sort']?>">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 是否显示 </label>
+
+                                            <div class="col-sm-9">
+                                                <?php if($info['show_status']==1){?>
+                                                    是 <input type="radio" name="show_status" value="1" checked>
+                                                    否 <input type="radio" name="show_status" value="0">
+                                                <?php } else {?>
+                                                    是 <input type="radio" name="show_status" value="1">
+                                                    否 <input type="radio" name="show_status" value="0" checked  >
+                                                <?php }?>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 删除状态 </label>
+
+                                            <div class="col-sm-9">
+                                                <?php if($info['del_status']==1){?>
+                                                    是 <input type="radio" name="del_status" value="1" checked>
+                                                    否 <input type="radio" name="del_status" value="0">
+                                                <?php } else {?>
+                                                    是 <input type="radio" name="del_status" value="1">
+                                                    否 <input type="radio" name="del_status" value="0" checked  >
+                                                <?php }?>
+
+                                            </div>
+
+                                        </div>
+
+									<div class="hr hr-24"></div>
+
+
+
+								
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+                                            <input type="submit" class="btn btn-info" value=" √ 修改 ">
+											<!--<button class="btn btn-info" type="button">
+												<i class="icon-ok bigger-110"></i>
+												复制房源
+											</button>-->
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
 
 
 								</form>
@@ -77,61 +178,11 @@ use yii\helpers\Url;
 								</div><!-- /row -->
 
 					</div><!-- /.page-content -->
-				</div><!-- /.main-content -->
+				<!-- /.main-content -->
 
-				<div class="ace-settings-container" id="ace-settings-container">
-					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-						<i class="icon-cog bigger-150"></i>
-					</div>
+				<!-- /.main-container-inner -->
 
-					<div class="ace-settings-box" id="ace-settings-box">
-						<div>
-							<div class="pull-left">
-								<select id="skin-colorpicker" class="hide">
-									<option data-skin="default" value="#438EB9">#438EB9</option>
-									<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-									<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-									<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-								</select>
-							</div>
-							<span>&nbsp; 选择皮肤</span>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
-							<label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
-							<label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
-							<label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-							<label class="lbl" for="ace-settings-rtl">切换到左边</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-							<label class="lbl" for="ace-settings-add-container">
-								切换窄屏
-								<b></b>
-							</label>
-						</div>
-					</div>
-				</div><!-- /#ace-settings-container -->
-			</div><!-- /.main-container-inner -->
-
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="icon-double-angle-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
+			<!-- /.main-container -->
 
 		<!-- basic scripts -->
 

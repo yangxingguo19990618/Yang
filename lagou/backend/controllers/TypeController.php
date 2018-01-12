@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use \frontend\controllers\CommonController;
 use backend\models\Admin;
-use backend\models\TypeList;
+use backend\models\JobType;
 
 /**
  * Site controller
@@ -18,7 +18,7 @@ class TypeController extends CommonController
     //工作分类列表
     public function actionTypelist()
     {
-        $type = TypeList::find()
+        $type = JobType::find()
             ->asArray()
             ->all();
         $data = $this->GetTree($type,0,0);
@@ -30,14 +30,14 @@ class TypeController extends CommonController
     {
         if(Yii::$app->request->isPost){
             $data = Yii::$app->request->post();
-            $model = new TypeList();
-            $model->type_name = $data['type_name'];
+            $model = new JobType();
+            $model->job_type_name = $data['type_name'];
             $model->parent_id = $data['parent_id'];
             if($model->save()) {
                 $this->redirect(['type/typelist']);
             }
         }else{
-            $type = TypeList::find()
+            $type = JobType::find()
                 ->asArray()
                 ->all();
             $data = $this->GetTree($type,0,0);
@@ -50,7 +50,7 @@ class TypeController extends CommonController
     public function actionDel()
     {
         $id = Yii::$app->request->get('id');
-        $customer = TypeList::findOne($id);
+        $customer = JobType::findOne($id);
         $res = $customer->delete();
         if($res){
             $this->redirect(['type/typelist']);
@@ -61,12 +61,12 @@ class TypeController extends CommonController
     public function actionUpd()
     {
         $id = Yii::$app->request->get('id');
-        $info = TypeList::find()
-            ->where(['id'=>$id])
+        $info = JobType::find()
+            ->where(['job_type_id'=>$id])
             ->asArray()
             ->one()
         ;
-        $type = TypeList::find()
+        $type = JobType::find()
             ->asArray()
             ->all();
         $data = $this->GetTree($type,0,0);
@@ -82,8 +82,8 @@ class TypeController extends CommonController
         $data = Yii::$app->request->post();
         //var_dump($data);exit;
         $id = $data['id'];
-        $customer = TypeList::findOne($id);
-        $customer->type_name = $data['type_name'];
+        $customer = JobType::findOne($id);
+        $customer->job_type_name = $data['type_name'];
         $customer->parent_id = $data['parent_id'];
         $res = $customer->save();
         if($res){

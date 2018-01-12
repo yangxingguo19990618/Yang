@@ -20,8 +20,8 @@ use yii\helpers\Url;
 								<i class="icon-home home-icon"></i>
 								<a href="<?=Url::toRoute(['index/index'])?>">首页</a>
 							</li>
-							<li class="active">工作分类管理</li>
-							<li class="active">添加分类</li>
+							<li class="active">友情链接管理</li>
+							<li class="active">添加友情连接</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -29,29 +29,26 @@ use yii\helpers\Url;
 							<div class="row">
 									<div class="col-xs-12">
 									
-									<form class="form-horizontal" role="form" action="<?=Url::toRoute(['type/addtype'])?>" method="post">
+									<form class="form-horizontal" role="form" action="<?=Url::toRoute(['friend/add'])?>" method="post">
+
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 分类名称 </label>
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 连接名称 </label>
 
                                             <div class="col-sm-9">
-                                                <input type="text" id="form-field-1" placeholder="分类名称"  name="type_name" class="col-xs-10 col-sm-5" />
+                                                <input type="text" id="form-field-1" placeholder="请填写友情链接名"  name="friend_name" class="col-xs-10 col-sm-5" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 连接地址 </label>
+
+                                            <div class="col-sm-9">
+                                                <input type="text" id="form-field-1" placeholder="例: http://www.taobao.com"  name="friend_src" class="col-xs-10 col-sm-5" />
                                             </div>
                                         </div>
 
                                         <div class="space-4"></div>
 
-                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 父级名称 </label>
-
-                                                            <div class="col-sm-9">
-                                                                <select name="parent_id">
-                                                                    <option value="">&nbsp;</option>
-                                                                    <?php foreach ($data as $v) {?>
-                                                                        <option value="<?=$v['job_type_id']?>"><?=$v['job_type_name']?></option>
-                                                                    <?php }?>
-                                                                </select>
-                                                                </div>
-                                        </div>
                                         <div class="clearfix form-actions">
                                             <div class="col-md-offset-3 col-md-9">
                                                 <!--<input type="submit" class="btn btn-info" value=" 添加 ">-->

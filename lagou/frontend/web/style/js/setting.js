@@ -449,67 +449,7 @@ $(function(){
 		}
 	});*/
 
-	//修改密码页面
-	$('#oldpassword').focus(function(){
-		$('#updatePwd_beError').hide();
-	})
-	$('#updatePswForm').validate({
-		/*onkeyup: false,
-    	focusCleanup:false,*/
-        rules: {
-        	oldpassword: {
-        		required:true,
-    	    	rangelength: [6,16]
-    	   	}, 
-    	   	newpassword: {
-    	   		required: true,
-    	    	rangelength: [6,16]
-    	   	},
-    	   	comfirmpassword: {
-    	   		required: true,
-    	   	    equalTo: "#newpassword"
-    	   	}
-    	},
-    	messages: {
-        	oldpassword: {
-        		required:"请输入当前密码",
-    	    	rangelength: "请输入6-16位密码，字母区分大小写"
-    	   	}, 
-    	   	newpassword: {
-    	   		required: "请输入新密码",
-    	    	rangelength: "请输入6-16位密码，字母区分大小写"
-    	   	},
-    	   	comfirmpassword: {
-    	   		required: "请再次输入新密码",
-    	    	equalTo: "两次输入的密码不一致，请重新输入"
-    	   	}
-    	},
-    	submitHandler:function(form){
-    		var oldpassword = $('#oldpassword').val();
-    		var newpassword = $('#newpassword').val();
-    		var comfirmpassword = $('#comfirmpassword').val();
-    		var resubmitToken = $('#resubmitToken').val();
-    		$.ajax({
-    			url:ctx+'/user/updatePwd.json',
-    			type:'POST',
-    			data:{
-    				oldPassword:oldpassword,
-    				newPassword:newpassword,
-    				newPassword2:comfirmpassword,
-    				resubmitToken:resubmitToken
-    			},
-            	dataType:'json'
-    		}).done(function(result){
-				$('#resubmitToken').val(result.resubmitToken);
-    			if(result.success){
-    				$.colorbox({inline:true, href:$("#updatePassword"),title:"修改密码成功"});
-    				setCountdown(4,'updatePassword h4 span',ctx+"/user/logout.html");	//调用倒计时
-    			}else{
-    				$('#updatePwd_beError').html(result.msg).show();
-    			}
-    		});
-        }  
-    });
+
 	
 	//解除招聘服务页面
 	/*$('.user_confirmDel').click(function(){

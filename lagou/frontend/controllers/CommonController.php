@@ -46,14 +46,14 @@ class CommonController extends Controller
         foreach($arr as $key=>$val) {
             if($val['parent_id'] == $pid) {
                 $flg = str_repeat('--',$step);
-                $val['type_name'] = $flg.$val['type_name'];
+                $val['job_type_name'] = $flg.$val['job_type_name'];
                 $tree[] = $val;
-                $this->GetTree($arr , $val['id'] ,$step+1);
+                $this->GetTree($arr , $val['job_type_id'] ,$step+1);
             }
         }
         return $tree;
     }
-    //地区无限极分类
+
     public function GetArea($arr,$pid,$step){
         global $tree;
         foreach($arr as $key=>$val) {
@@ -64,6 +64,36 @@ class CommonController extends Controller
                 $this->GetArea($arr , $val['region_id'] ,$step+1);
             }
         }
+        return $tree;
+    }
+
+    public function Category($categories)
+    {
+        $tree = array();
+//第一步，将分类id作为数组key,并创建children单元
+        foreach($categories as $category){
+            $tree[$category['job_type_id']] = $category;
+            $tree[$category['job_type_id']]['children'] = array();
+        }
+       // echo '<pre>';
+        //print_r($tree);die;
+//第二步，利用引用，将每个分类添加到父类children数组中，这样一次遍历即可形成树形结构。
+        foreach($tree as $key=>$item){
+            if($item['parent_id'] != 0){
+                $tree[$item['parent_id']]['children'][] = &$tree[$key];//注意：此处必须传引用否则结果不对
+               /* if($tree[$key]['children']     == null){
+                    unset($tree[$key]['children']); //如果children为空，则删除该children元素（可选）
+                }*/
+            }
+        }
+
+////第三步，删除无用的非根节点数
+        foreach($tree as $key=>$value){
+            if($value['parent_id'] != 0){
+                unset($tree[$key]);
+            }
+        }
+
         return $tree;
     }
 

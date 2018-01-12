@@ -7,6 +7,12 @@ use yii\helpers\Url;
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    td{
+        text-align:center; /*设置水平居中*/
+        vertical-align:middle;/*设置垂直居中*/
+    }
+</style>
 
 <body>
 
@@ -51,10 +57,17 @@ use yii\helpers\Url;
                                             <span class="lbl"></span>
                                         </label>
                                     </th>
-                                    <th>分类编号</th>
-                                    <th>分类名称</th>
-                                    <th>父级ID</th>
-                                    <th>点击量</th>
+                                    <th>广告编号</th>
+                                    <th>广告名称</th>
+                                    <th>广告地区</th>
+                                    <th>广告图片</th>
+                                    <th>广告链接</th>
+                                    <th>广告描述</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>广告序号</th>
+                                    <th>是否展示</th>
+                                    <th>删除状态</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -68,14 +81,41 @@ use yii\helpers\Url;
                                                 <span class="lbl"></span>
                                             </label>
                                         </td>
-                                        <td><?=$v['job_type_id']?></td>
-                                        <td><?=$v['job_type_name']?></td>
-                                        <td><?=$v['parent_id']?></td>
-                                        <td><?=$v['click_num']?></td>
+                                        <td>A0000<?=$v['adver_id']?></td>
+                                        <td><?=$v['adver_name']?></td>
                                         <td>
-                                            <a href="<?=Url::toRoute(['type/del','id'=>$v['job_type_id']])?>">删除</a>
+                                            <?php
+                                                $connection = \Yii::$app->db;
+                                                $command = $connection->createCommand('SELECT region_name FROM region WHERE region_id='.$v['adver_place_id']);
+                                                $post = $command->queryOne();
+                                                echo $post['region_name'];
+                                            ?>
+                                        </td>
+                                        <td><img src="<?=$v['adver_img']?>" alt="" width="50px" height="50px"> </td>
+                                        <td><a href="<?=$v['adver_link']?>"><?=$v['adver_link']?></a></td>
+                                        <td><?=$v['adver_content']?></td>
+                                        <td><?=$v['adver_start_time']?></td>
+                                        <td><?=$v['adver_end_time']?></td>
+                                        <td><?=$v['adver_sort']?></td>
+                                        <td>
+                                            <?php if($v['show_status']==1){?>
+                                                <img width="30px" height="30px" src="assets/avatars/yes.jpg" alt="">
+                                            <?php } else {?>
+                                                <img width="15px" height="15px" src="assets/avatars/no.jpg" alt="">
+                                            <?php }?>
+                                        </td>
+                                        <td>
+                                            <?php if($v['del_status']==1){?>
+                                                <img width="30px" height="30px" src="assets/avatars/yes.jpg" alt="">
+                                            <?php } else {?>
+                                                <img width="15px" height="15px" src="assets/avatars/no.jpg" alt="">
+                                            <?php }?>
+                                        </td>
+
+                                        <td>
+                                            <a href="<?=Url::toRoute(['adver/del','id'=>$v['adver_id']])?>">删除</a>
                                             ||
-                                            <a href="<?=Url::toRoute(['type/upd','id'=>$v['job_type_id']])?>">修改</a>
+                                            <a href="<?=Url::toRoute(['adver/upd','id'=>$v['adver_id']])?>">修改</a>
                                         </td>
                                     </tr>
                                 <?php }?>

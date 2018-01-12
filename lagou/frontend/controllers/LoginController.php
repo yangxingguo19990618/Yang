@@ -17,32 +17,35 @@ class LoginController extends CommonController
     //关闭防csrf验证
     public $enableCsrfValidation = false;
 
+    //验证码
+    public function actions(){
+        return [
+            'captchatest' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'maxLength' => 4, //生成的验证码最大长度
+                'minLength' => 4  //生成的验证码最短长度
+            ]
+        ];
+    }
+
     public function actionLogin()
     {
         if(Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             //$model =  new Users();
-
             $res = Users::find()
                 ->where([
                     'email'=>$data['email'],
                     'password'=>md5($data['password'])
-                    ])
+                ])
                 ->asArray()
                 ->one();
-            //var_dump($res);exit;
             if($res) {
                 $session = \Yii::$app->session;
                 $session->set('u_id' ,$res['id']);
-                //var_dump($session->get('u_id'));
                 Yii::$app->response->format= \yii\web\Response::FORMAT_JSON;
                 return ['result'=>1];
             }
-            //$connection = \Yii::$app->db;
-            //$command = $connection->createCommand();
-            //$post = $command->queryOne();
-
-
         }
         return $this->render('login');
     }
@@ -59,18 +62,20 @@ class LoginController extends CommonController
             $model->status = $data['type'];
             $res = $model->save();
             if($res) {
-                //var_dump($res);
-                //$this->returnAjax($res);
                 Yii::$app->response->format= \yii\web\Response::FORMAT_JSON;
                 return ['result'=>$res];
             }
-
-
-
-
         }else{
             return $this->render('register');
         }
+    }
 
+    public function actionExit()
+    {
+        $session = \Yii::$app->session;
+        $remove = $session->remove('u_id');
+        if($remove){
+            $this->redirect(['index/index']);
+        }
     }
 }

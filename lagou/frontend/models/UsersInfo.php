@@ -15,6 +15,10 @@ use Yii;
  * @property string $user_card
  * @property string $user_img
  * @property string $user_really_name
+ * @property string $user_tel
+ * @property string $work_exp
+ * @property string $status
+ * @property integer $edu_id
  */
 class UsersInfo extends \yii\db\ActiveRecord
 {
@@ -32,7 +36,8 @@ class UsersInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_name', 'user_sex', 'user_age', 'user_email', 'user_card', 'user_img', 'user_really_name'], 'string', 'max' => 255],
+            [['edu_id'], 'integer'],
+            [['user_name', 'user_sex', 'user_age', 'user_email', 'user_card', 'user_img', 'user_really_name', 'user_tel', 'work_exp', 'status'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,6 +55,10 @@ class UsersInfo extends \yii\db\ActiveRecord
             'user_card' => 'User Card',
             'user_img' => 'User Img',
             'user_really_name' => 'User Really Name',
+            'user_tel' => 'User Tel',
+            'work_exp' => 'Work Exp',
+            'status' => 'Status',
+            'edu_id' => 'Edu ID',
         ];
     }
 }

@@ -4,7 +4,13 @@ use frontend\models\Users;
 use frontend\models\UsersInfo;
 use frontend\models\Nav;
 ?>
-
+<!--根据当前IP地址获取当前地区-->
+<?php
+$area_ip = $_SERVER["REMOTE_ADDR"] = '114.249.223.21';
+$area_info = file_get_contents('http://api.k780.com:88/?app=ip.get&ip='.$area_ip.'&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json');
+$arr_info = json_decode($area_info,true);
+$area_name = $arr_info['result']['att'];
+?>
 <head>
     <script type="text/javascript" async="" src="http://conv.youdao.com/pub/conversion.js"></script><script id="allmobilize" charset="utf-8" src="style/js/allmobilize.min.js"></script><style type="text/css"></style>
     <meta http-equiv="Cache-Control" content="no-siteapp">
@@ -31,13 +37,14 @@ use frontend\models\Nav;
     <script src="style/js/ajaxfileupload.js" type="text/javascript"></script>
     <script type="text/javascript" src="style/js/additional-methods.js"></script>
     <!--[if lte IE 8]>
-    <script type="text/javascript" src="style/js/excanvas.js"></script>
+    <script type="text/javascript" src="style/js/excanvas.js"></scr ipt>
     <![endif]-->
     <script type="text/javascript">
         var youdao_conv_id = 271546;
     </script>
     <script type="text/javascript" src="style/js/conv.js"></script>
 </head>
+当前城市为<a href="">:<?=$area_name?></a>
 <div id="header">
     <div class="wrapper">
         <a href="index.html" class="logo">
@@ -73,11 +80,21 @@ use frontend\models\Nav;
             ->one();
             ?>
 
-            <ul class="loginTop">
-                <li><img src="<?=$user['user_img']?>" alt="" width="30px" height="30px"></li>
-                <li>欢迎您<a href="=" rel="nofollow"><?=$user['user_name']?></a></li>
 
-            </ul>
+            <dl class="collapsible_menu">
+                <dt>
+                    <span><img src="<?=$user['user_img']?>" alt="" width="30px" height="30px"></span>
+                    <span><?=$user['user_name']?>&nbsp;</span>
+                    <span class="red dn" id="noticeDot-0"></span>
+                    <i></i>
+                </dt>
+                <dd style="display: none;"><a rel="nofollow" href="<?=Url::toRoute(['jianli/index'])?>">我的简历</a></dd>
+                <dd style="display: none;"><a href="collections.html">我收藏的职位</a></dd>
+                <dd class="btm" style="display: none;"><a href="subscribe.html">我的订阅</a></dd>
+                <dd style="display: none;"><a href="create.html">我要招人</a></dd>
+                <dd style="display: none;"><a href="<?=Url::toRoute(['account/index'])?>">帐号设置</a></dd>
+                <dd class="logout" style="display: none;"><a rel="nofollow" href="<?=Url::toRoute(['login/exit'])?>">退出</a></dd>
+            </dl>
 
         <?php }?>
 

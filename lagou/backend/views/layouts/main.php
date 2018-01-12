@@ -149,7 +149,7 @@ use backend\models\Admin;
                         <span class="menu-text"> 后台控制台 </span>
                     </a>
                 </li>
-
+                <!--工作分类-->
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-desktop"></i>
@@ -176,7 +176,34 @@ use backend\models\Admin;
 
                     </ul>
                 </li>
+                <!--友情链接管理-->
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-desktop"></i>
+                        <span class="menu-text"> 友情链接 </span>
 
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="<?=Url::toRoute(['friend/add'])?>">
+                                <i class="icon-double-angle-right"></i>
+                                添加友情链接
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<?=Url::toRoute(['friend/lists'])?>">
+                                <i class="icon-double-angle-right"></i>
+                                友情链接列表
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <!--前台管理-->
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <i class="icon-list"></i>
@@ -249,30 +276,68 @@ use backend\models\Admin;
 
                     </ul>
                 </li>
-
+                <!--广告管理-->
                 <li>
                     <a href="#" class="dropdown-toggle">
-                        <i class="icon-edit"></i>
-                        <span class="menu-text"> 论坛管理 </span>
+                        <i class="icon-list"></i>
+                        <span class="menu-text"> 广告管理 </span>
 
                         <b class="arrow icon-angle-down"></b>
                     </a>
 
                     <ul class="submenu">
+                        <!--广告位管理-->
                         <li>
-                            <a href="form-elements.html">
+                            <a href="#" class="dropdown-toggle">
                                 <i class="icon-double-angle-right"></i>
-                                发布公告
-                            </a>
-                        </li>
 
+                                广告位管理
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-leaf"></i>
+                                        所有广告位
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-leaf"></i>
+                                        添加广告位
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <!--广告管理-->
                         <li>
-                            <a href="form-wizard.html">
+                            <a href="#" class="dropdown-toggle">
                                 <i class="icon-double-angle-right"></i>
-                                进入论坛
-                            </a>
-                        </li>
 
+                                广告管理
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="<?=Url::toRoute(['adver/lists'])?>">
+                                        <i class="icon-leaf"></i>
+                                        广告列表
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="<?=Url::toRoute(['adver/add'])?>">
+                                        <i class="icon-leaf"></i>
+                                        添加广告
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
                     </ul>
                 </li>
 

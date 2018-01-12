@@ -42,10 +42,10 @@
                         <form role="form" action="<?=Url::toRoute(['login/login'])?>" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="超级管理员账号" name="username"  >
+                                    <input class="form-control" placeholder="超级管理员账号" name="username"  value="admin">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="请输入密码" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="请输入密码" name="password" type="password" value="123456">
                                 </div>
                                 <div class="checkbox">
                                     <label>

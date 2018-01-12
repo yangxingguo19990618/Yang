@@ -20,8 +20,8 @@ use yii\helpers\Url;
 								<i class="icon-home home-icon"></i>
 								<a href="<?=Url::toRoute(['index/index'])?>">首页</a>
 							</li>
-							<li class="active">工作分类管理</li>
-							<li class="active">添加分类</li>
+							<li class="active">友情链接管理</li>
+							<li class="active">修改连接</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -29,37 +29,34 @@ use yii\helpers\Url;
 							<div class="row">
 									<div class="col-xs-12">
 									
-									<form class="form-horizontal" role="form" action="<?=Url::toRoute(['type/addtype'])?>" method="post">
+									<form class="form-horizontal" role="form" action="<?=Url::toRoute(['friend/upd_do'])?>" method="post">
+                                        <input type="hidden" name="id" value="<?=$info['friend_id']?>">
+
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 分类名称 </label>
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 链接名称 </label>
 
                                             <div class="col-sm-9">
-                                                <input type="text" id="form-field-1" placeholder="分类名称"  name="type_name" class="col-xs-10 col-sm-5" />
+                                                <input type="text" id="form-field-1" value="<?=$info['friend_name']?>"  name="friend_name" class="col-xs-10 col-sm-5" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 连接地址 </label>
+
+                                            <div class="col-sm-9">
+                                                <input type="text" id="form-field-1" value="<?=$info['friend_src']?>"  name="friend_src" class="col-xs-10 col-sm-5" />
                                             </div>
                                         </div>
 
                                         <div class="space-4"></div>
 
-                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 父级名称 </label>
-
-                                                            <div class="col-sm-9">
-                                                                <select name="parent_id">
-                                                                    <option value="">&nbsp;</option>
-                                                                    <?php foreach ($data as $v) {?>
-                                                                        <option value="<?=$v['job_type_id']?>"><?=$v['job_type_name']?></option>
-                                                                    <?php }?>
-                                                                </select>
-                                                                </div>
-                                        </div>
                                         <div class="clearfix form-actions">
                                             <div class="col-md-offset-3 col-md-9">
                                                 <!--<input type="submit" class="btn btn-info" value=" 添加 ">-->
                                                 <button class="btn btn-info" type="submit">
                                                     <i class="icon-ok bigger-110"></i>
-                                                    增加
+                                                    修改
                                                 </button>
-
                                                 &nbsp; &nbsp; &nbsp;
                                                 <button class="btn" type="reset">
                                                     <i class="icon-undo bigger-110"></i>

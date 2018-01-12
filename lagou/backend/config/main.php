@@ -12,7 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
 
     //默认访问的控制器 方法
-    'defaultRoute'=>'index/index',
+    'defaultRoute'=>'login/login',
 
     'bootstrap' => ['log'],
     'modules' => [],

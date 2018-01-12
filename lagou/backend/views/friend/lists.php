@@ -2,6 +2,7 @@
 <?php
 
 use yii\helpers\Url;
+use backend\models\Nav;
 
 ?>
 <!DOCTYPE html>
@@ -31,8 +32,8 @@ use yii\helpers\Url;
                         <i class="icon-home home-icon"></i>
                         <a href="<?=Url::toRoute(['index/index'])?>">首页</a>
                     </li>
-                    <li class="active">工作分类</li>
-                    <li class="active">分类列表</li>
+                    <li class="active">友情链接</li>
+                    <li class="active">友情链接列表</li>
                 </ul><!-- .breadcrumb -->
             </div>
 
@@ -51,10 +52,8 @@ use yii\helpers\Url;
                                             <span class="lbl"></span>
                                         </label>
                                     </th>
-                                    <th>分类编号</th>
-                                    <th>分类名称</th>
-                                    <th>父级ID</th>
-                                    <th>点击量</th>
+                                    <th>连接名称</th>
+                                    <th>链接地址</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -68,14 +67,12 @@ use yii\helpers\Url;
                                                 <span class="lbl"></span>
                                             </label>
                                         </td>
-                                        <td><?=$v['job_type_id']?></td>
-                                        <td><?=$v['job_type_name']?></td>
-                                        <td><?=$v['parent_id']?></td>
-                                        <td><?=$v['click_num']?></td>
+                                        <td><?=$v['friend_name']?></td>
+                                        <td><?=$v['friend_src']?></td>
                                         <td>
-                                            <a href="<?=Url::toRoute(['type/del','id'=>$v['job_type_id']])?>">删除</a>
+                                            <a href="<?=Url::toRoute(['friend/del','id'=>$v['friend_id']])?>">删除</a>
                                             ||
-                                            <a href="<?=Url::toRoute(['type/upd','id'=>$v['job_type_id']])?>">修改</a>
+                                            <a href="<?=Url::toRoute(['friend/upd','id'=>$v['friend_id']])?>">修改</a>
                                         </td>
                                     </tr>
                                 <?php }?>
